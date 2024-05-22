@@ -15,28 +15,7 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 const connection = mongoose.connection;
 connection.once('open', () => {
   console.log('MongoDB database connection established successfully');
-  const attendanceCollection = connection.collection('entries');
-
-  // Set up change stream for real-time updates
-  const changeStream = attendanceCollection.watch();
-
-  // SSE endpoint
-  app.get('/sse', (req, res) => {
-    res.setHeader('Content-Type', 'text/event-stream');
-    res.setHeader('Cache-Control', 'no-cache');
-    res.setHeader('Connection', 'keep-alive');
-    res.flushHeaders(); // Flush headers to establish SSE with client
-
-    changeStream.on('change', (change) => {
-      console.log('Change detected:', change);
-      res.write(`data: ${JSON.stringify(change.fullDocument)}\n\n`);
-    });
-
-    req.on('close', () => {
-      console.log('Client disconnected');
-      changeStream.removeAllListeners('change');
-    });
-  });
+  const attendanceCollection = connection.collection('entries');  
 });
 
 // Schema and Model

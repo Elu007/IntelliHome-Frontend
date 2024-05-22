@@ -20,22 +20,12 @@ const AttendanceTable = ({ setTotalCount }) => {
     };
 
     fetchData();
-    const eventSource = new EventSource('http://localhost:5000/sse');
 
-    eventSource.onmessage = (event) => {
-      const newEntry = JSON.parse(event.data);
-      setData((prevData) => [...prevData, newEntry]);
-      setTotalCount((prevCount) => prevCount + 1);
-    };
+    // Set interval to fetch data every 15 seconds
+    const intervalId = setInterval(fetchData, 15000); // 15000ms = 15s
 
-    eventSource.onerror = () => {
-      setError('There was an error with the SSE connection!');
-      eventSource.close();
-    };
-
-    return () => {
-      eventSource.close();
-    };
+    // Clear the interval when the component unmounts
+    return () => clearInterval(intervalId);
   }, [setTotalCount]);
 
   const formatTime = (timeString) => {

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import AttendanceTable from './AttendanceTable';
 
 const Home = () => {
-  const [totalCount, setTotalCount] = useState(0); // State to hold the total count
+  const [totalCount, setTotalCount] = useState(0);
 
   return (
     <div className="container mx-auto p-4">
