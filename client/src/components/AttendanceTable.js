@@ -22,7 +22,7 @@ const AttendanceTable = ({ setTotalCount }) => {
     fetchData();
 
     // Set interval to fetch data every 15 seconds
-    const intervalId = setInterval(fetchData, 15000); // 15000ms = 15s
+    const intervalId = setInterval(fetchData, 10000); // 10000ms = 10s
 
     // Clear the interval when the component unmounts
     return () => clearInterval(intervalId);

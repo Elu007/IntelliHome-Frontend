@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import AttendanceTable from './AttendanceTable';
+import SwitchBoard from './SwitchBoard';
 
 const Home = () => {
   const [totalCount, setTotalCount] = useState(0);
@@ -12,9 +13,14 @@ const Home = () => {
           <div className="w-full md:w-4/5">
             <AttendanceTable setTotalCount={setTotalCount} />
           </div>
-          <div className="w-full md:w-1/5 mt-4 md:mt-0 ml-0 md:ml-4 bg-white p-4 rounded-lg shadow-md">
-            <h2 className="text-xl font-semibold">Total Scanned Person Count</h2>
-            <p className="text-2xl font-bold">{totalCount}</p>
+          <div className="flex flex-col w-full md:w-1/5 mt-4 md:mt-0 ml-0 md:ml-4">
+            <div className="bg-white p-4 rounded-lg shadow-md mb-4">
+              <h2 className="text-xl font-semibold">Total Scanned Person Count</h2>
+              <p className="text-2xl font-bold">{totalCount}</p>
+            </div>
+            <div className="bg-white p-4 rounded-lg shadow-md">
+              <SwitchBoard />
+            </div>
           </div>
         </div>
       </div>
